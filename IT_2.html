@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Back Room - IT, Web & Software Development Support</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    @font-face {
+      font-family: 'Gotham Book';
+      src: url('https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/font/Gotham-Book.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Gotham Black';
+      src: url('https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/font/GOTHAM-BLACK.ttf') format('truetype');
+      font-weight: 900;
+      font-style: normal;
+    }
+
+    :root{
+      --primary-purple:#34256B;
+      --accent-pink:#F59BB8;
+      --accent-yellow:#F5CE00;
+      --accent-red:#DD3C27;
+      --black:#000;
+      --white:#fff;
+      --light-gray:#F5F5F5;
+      --medium-gray:#E0E0E0;
+
+      --card-radius: 20px;
+      --shadow: 0 18px 55px rgba(0,0,0,.12);
+      --shadow-soft: 0 10px 40px rgba(0,0,0,.10);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Gotham Book', sans-serif;
+      font-weight:400;
+      color:var(--black);
+      overflow-x:hidden;
+      line-height:1.6;
+      background: var(--white);
+    }
+    h1,h2,h3,h4,h5,h6{
+      font-family:'Gotham Black', sans-serif;
+      font-weight:900;
+      line-height:1.15;
+    }
+    a{color:inherit}
+    html{scroll-behavior:smooth;}
+
+    /* NAV */
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      background:var(--white);
+      box-shadow:0 2px 20px rgba(0,0,0,0.1);
+      z-index:1000;
+      transition:all .3s ease;
+    }
+    .nav-container{
+      max-width:1400px;
+      margin:0 auto;
+      padding:1rem 2rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .logo{height:40px;}
+    .logo img{height:45px;width:auto;}
+    .nav-menu{
+      display:flex;
+      list-style:none;
+      gap:2rem;
+      align-items:center;
+    }
+    .nav-menu a{
+      text-decoration:none;
+      color:var(--black);
+      font-weight:600;
+      transition:color .3s;
+      position:relative;
+    }
+    .nav-menu a:hover{color:var(--primary-purple);}
+    .nav-menu .dropdown{position:relative;}
+    .dropdown-content{
+      display:none;
+      position:absolute;
+      top:100%;
+      left:0;
+      background:var(--white);
+      box-shadow:0 8px 30px rgba(0,0,0,0.15);
+      min-width:250px;
+      border-radius:8px;
+      padding:1rem 0;
+      margin-top:.5rem;
+    }
+    .dropdown:hover .dropdown-content{display:block;}
+    .dropdown-content a{
+      display:block;
+      padding:.75rem 1.5rem;
+      color:var(--black);
+      text-decoration:none;
+      font-weight:500;
+    }
+    .dropdown-content a:hover{
+      background:var(--light-gray);
+      color:var(--primary-purple);
+    }
+
+    .cta-button{
+      background:var(--accent-yellow);
+      color:var(--black);
+      padding:.75rem 2rem;
+      border-radius:50px;
+      text-decoration:none;
+      font-weight:700;
+      transition:all .3s;
+      display:inline-block;
+      border:none;
+      cursor:pointer;
+    }
+    .cta-button:hover{
+      background:var(--accent-pink);
+      color:var(--white);
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(245, 155, 184, 0.4);
+    }
+    .cta-button-secondary{
+      background:transparent;
+      color:var(--white);
+      border:2px solid rgba(255,255,255,.9);
+    }
+    .cta-button-secondary:hover{
+      background:rgba(255,255,255,.12);
+      border-color:rgba(255,255,255,.9);
+      color:var(--white);
+      transform:translateY(-2px);
+      box-shadow:none;
+    }
+
+    /* Layout helpers */
+    .page-wrap{margin-top:80px;}
+    .section-container{
+      max-width:1400px;
+      margin:0 auto;
+      padding:0 2rem;
+    }
+
+    /* BIG SECTION HEADING */
+    .big-heading{
+      font-size:3rem;
+      color: var(--primary-purple);
+      margin-bottom:.9rem;
+      line-height:1.05;
+    }
+    .big-sub{
+      font-size:1.1rem;
+      color:#444;
+      opacity:.9;
+      line-height:1.85;
+      margin-bottom: 1.4rem;
+      max-width: 900px;
+    }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      background: linear-gradient(135deg, var(--primary-purple) 0%, #4a3785 100%);
+      color:var(--white);
+      overflow:hidden;
+      padding:5.6rem 0 4.6rem;
+    }
+    .hero::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(245,206,0,.25), transparent 40%),
+        radial-gradient(circle at 82% 30%, rgba(245,155,184,.25), transparent 45%),
+        radial-gradient(circle at 55% 110%, rgba(221,60,39,.18), transparent 45%);
+      pointer-events:none;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap:3rem;
+      align-items:center;
+      position:relative;
+      z-index:1;
+    }
+    .hero-eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      background: rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      padding:.55rem 1rem;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.95rem;
+      width:fit-content;
+      margin-bottom:1.2rem;
+    }
+    .hero-eyebrow i{color:var(--accent-yellow);}
+    .hero h1{
+      font-size:3.7rem;
+      max-width:900px;
+      margin-bottom:1.1rem;
+      line-height:1.05;
+    }
+    .hero p{
+      font-size:1.35rem;
+      max-width:760px;
+      opacity:.95;
+      margin-bottom:2rem;
+      font-weight:300;
+    }
+    .hero-actions{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-top:.4rem;
+    }
+    .hero-media{
+      border-radius: 26px;
+      overflow:hidden;
+      box-shadow: 0 22px 70px rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.18);
+      position:relative;
+      height: 420px;
+      background:#2c205b;
+    }
+    .hero-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.02) contrast(1.02);
+    }
+    .hero-media::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(52,37,107,.62), rgba(52,37,107,.12));
+    }
+    .hero-badge{
+      position:absolute;
+      bottom:18px;
+      left:18px;
+      z-index:2;
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      background: rgba(255,255,255,.92);
+      color: var(--primary-purple);
+      padding:.65rem 1rem;
+      border-radius: 14px;
+      font-weight:900;
+      box-shadow: 0 10px 28px rgba(0,0,0,.18);
+    }
+    .hero-badge i{color: var(--accent-red);}
+
+    /* INTRO */
+    .intro{
+      padding:5rem 0;
+      background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+    }
+    .intro-inner{
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align:center;
+    }
+    .intro h2{
+      font-size:2.6rem;
+      color: var(--primary-purple);
+      margin-bottom:1rem;
+    }
+    .intro p{
+      font-size:1.15rem;
+      color:#333;
+      opacity:.95;
+      line-height:1.85;
+    }
+    .intro .emphasis{
+      margin-top:1.3rem;
+      font-weight:900;
+      color: var(--primary-purple);
+    }
+
+    /* Quote section */
+    .quote-section{
+      padding:5.5rem 0;
+      background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+      text-align:center;
+    }
+    .quote-card{
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 26px;
+      padding: 3rem 2.6rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(0,0,0,.06);
+      position:relative;
+      overflow:hidden;
+    }
+    .quote-card::before{
+      content:'“';
+      position:absolute;
+      top:-12px;
+      left:18px;
+      font-family:'Gotham Black', sans-serif;
+      font-size:7.5rem;
+      color: rgba(245,155,184,.35);
+      line-height:1;
+    }
+    .quote-text{
+      font-size:1.35rem;
+      line-height:1.75;
+      color:#222;
+      margin-bottom:1.8rem;
+      position:relative;
+      z-index:1;
+    }
+    .quote-meta{
+      display:flex;
+      flex-direction:column;
+      gap:.2rem;
+      align-items:center;
+      position:relative;
+      z-index:1;
+    }
+    .quote-meta .name{
+      font-weight:900;
+      color: var(--primary-purple);
+      font-size:1.15rem;
+    }
+    .quote-meta .org{
+      color:#666;
+      font-size:1rem;
+    }
+    .quote-actions{margin-top:1.9rem; position:relative; z-index:1;}
+
+    /* Split detail sections */
+    .detail{
+      padding:5.2rem 0;
+      background: var(--white);
+    }
+    .detail.alt{
+      background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+    }
+    .detail-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:3rem;
+      align-items:center;
+    }
+    .detail p{
+      color:#333;
+      opacity:.95;
+      font-size:1.08rem;
+      line-height:1.85;
+      margin-bottom:1.2rem;
+      max-width: 900px;
+    }
+
+    /* Bullets */
+    .bullets{
+      margin: .25rem 0 1.6rem 0;
+      padding-left: 1.1rem;
+      color:#444;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(240px, 1fr));
+      gap:.35rem 1.6rem;
+    }
+    .bullets li{line-height:1.55;}
+
+    .detail-actions{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:.2rem;
+    }
+    .pink-btn{
+      background: var(--accent-pink);
+      color: var(--white);
+      padding: .85rem 1.75rem;
+      border-radius: 50px;
+      text-decoration:none;
+      font-weight: 700;
+      display:inline-block;
+      width: fit-content;
+      transition: all .3s;
+    }
+    .pink-btn:hover{
+      background: var(--primary-purple);
+      transform: translateX(5px);
+    }
+
+    .detail-media{
+      border-radius: 26px;
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,.06);
+      height: 420px;
+      background: var(--medium-gray);
+      position:relative;
+    }
+    .detail-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .detail-media::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(52,37,107,.08), rgba(245,206,0,.08));
+      pointer-events:none;
+    }
+
+    /* Roles section */
+    .roles{
+      padding:6rem 0;
+      background: var(--white);
+    }
+    .roles-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:3rem;
+      align-items:start;
+    }
+    .roles p{
+      color:#333;
+      opacity:.95;
+      font-size:1.15rem;
+      line-height:1.85;
+      margin-bottom:1.4rem;
+      max-width: 100%;
+    }
+    .roles .big-sub{
+      max-width: 100%;
+    }
+
+    .role-groups{
+      display:flex;
+      flex-direction:column;
+      gap:.9rem;
+      margin-top:.6rem;
+    }
+    .role-item{
+      background: var(--white);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius: 16px;
+      padding: .95rem 1rem;
+      box-shadow: 0 8px 22px rgba(0,0,0,.06);
+    }
+    .role-item .title{
+      font-family:'Gotham Black', sans-serif;
+      color: var(--primary-purple);
+      font-size:1.05rem;
+      margin-bottom:.25rem;
+    }
+    .role-item .desc{
+      color:#444;
+      opacity:.95;
+      line-height:1.65;
+      font-size:.98rem;
+    }
+    .roles-actions{
+      margin-top:1.6rem;
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    /* Slider right column */
+    .slider-stack{
+      background: linear-gradient(135deg, var(--light-gray) 0%, #fff 100%);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius: 26px;
+      padding: 1.1rem;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 110px;
+    }
+    .slider-media{
+      position:relative;
+      border-radius: 22px;
+      overflow:hidden;
+      height: 560px;
+      background: var(--medium-gray);
+    }
+    .slider-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition: opacity .7s ease;
+    }
+    .slider-overlay{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(52,37,107,.05), rgba(52,37,107,.32));
+      pointer-events:none;
+    }
+    .slider-caption{
+      margin-top: .95rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .slider-caption .pill{
+      background: rgba(52,37,107,.10);
+      color: var(--primary-purple);
+      border: 1px solid rgba(52,37,107,.14);
+      padding: .55rem .95rem;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: .95rem;
+      display:inline-flex;
+      gap:.55rem;
+      align-items:center;
+      width: fit-content;
+    }
+    .slider-caption .pill i{color: var(--accent-red);}
+    .slider-dots{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+    .slider-dot{
+      width:8px;height:8px;border-radius:50%;
+      background: rgba(52,37,107,.25);
+      transition: all .25s;
+    }
+    .slider-dot.active{
+      width:26px;
+      border-radius: 999px;
+      background: var(--accent-yellow);
+    }
+
+    /* Tools logos */
+    .tools{
+      padding:6rem 0;
+      background: var(--light-gray);
+    }
+    .tools-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:3rem;
+      align-items:start;
+    }
+    .tools h2{
+      font-size:2.8rem;
+      color: var(--primary-purple);
+      margin-bottom:1rem;
+    }
+    .tools p{
+      color:#333;
+      opacity:.95;
+      font-size:1.1rem;
+      line-height:1.85;
+      margin-bottom:1.4rem;
+      max-width: 900px;
+    }
+
+    /* UPDATED: rolling logo wall (2 rows, no orphan) */
+    .logo-wall{
+      background: linear-gradient(135deg, var(--light-gray) 0%, #fff 100%);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius: 26px;
+      padding: 1.2rem 1.1rem;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      align-self: center;
+    }
+    .logo-wall::before,
+    .logo-wall::after{
+      content:'';
+      position:absolute;
+      top:0; bottom:0;
+      width:70px;
+      pointer-events:none;
+      z-index:2;
+    }
+    .logo-wall::before{
+      left:0;
+      background: linear-gradient(90deg, rgba(245,245,245,1), rgba(245,245,245,0));
+    }
+    .logo-wall::after{
+      right:0;
+      background: linear-gradient(270deg, rgba(255,255,255,1), rgba(255,255,255,0));
+    }
+
+    .logo-rows{
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+    .logo-row{
+      display:flex;
+      gap:1rem;
+      align-items:center;
+      width: max-content;
+      animation: tbrLogoScroll 26s linear infinite;
+      will-change: transform;
+    }
+    .logo-row.row-2{
+      animation-duration: 30s;
+      animation-direction: reverse;
+    }
+    @keyframes tbrLogoScroll{
+      0%{ transform: translateX(0); }
+      100%{ transform: translateX(-50%); }
+    }
+
+    .logo-track{
+      display:flex;
+      gap:1rem;
+      align-items:center;
+    }
+    .logo-tile{
+      background: var(--white);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius: 18px;
+      padding: 1rem .9rem;
+      height: 92px;
+      width: 170px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 10px 26px rgba(0,0,0,.06);
+      flex: 0 0 auto;
+    }
+    .logo-tile img{
+      max-height: 54px;
+      max-width: 100%;
+      width:auto;
+      filter: grayscale(100%);
+      opacity:.85;
+      transition: all .25s;
+    }
+    .logo-tile:hover img{
+      filter: grayscale(0%);
+      opacity:1;
+      transform: scale(1.04);
+    }
+
+    .tools-bullets{
+      margin: 0;
+      padding-left: 1.1rem;
+      color:#444;
+      display:flex;
+      flex-direction:column;
+      gap:.35rem;
+    }
+    .tools-actions{margin-top:1.4rem;}
+
+    /* Built block */
+    .built{
+      padding:6rem 0;
+      background: var(--white);
+    }
+    .built-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:3rem;
+      align-items:center;
+    }
+    .built h2{
+      font-size:2.9rem;
+      color: var(--primary-purple);
+      margin-bottom:1rem;
+    }
+    .built p{
+      font-size:1.15rem;
+      color:#333;
+      opacity:.95;
+      line-height:1.85;
+      margin-bottom:1.4rem;
+      max-width: 900px;
+    }
+    .built-media{
+      border-radius: 26px;
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,.06);
+      height: 420px;
+      background: var(--medium-gray);
+      position:relative;
+    }
+    .built-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .built-media::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(52,37,107,.08), rgba(245,206,0,.08));
+      pointer-events:none;
+    }
+
+    /* ===== CONSISTENT "Build the Team That Frees You Up" (REPLACED SECTION STYLES) ===== */
+    .team-categories{
+      padding: 6rem 2rem;
+      background: var(--light-gray);
+    }
+    .team-categories .section-title{
+      font-size:3rem;
+      text-align:center;
+      margin-bottom: 0;
+      color: var(--primary-purple);
+    }
+    .team-categories .categories-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      max-width: 1400px;
+      margin: 4rem auto 0;
+      padding: 0;
+      align-items: start;
+    }
+    .category-card{
+      background: var(--white);
+      border-radius: 20px;
+      overflow:hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.10);
+      display:grid;
+      grid-template-columns: 200px 1fr;
+      transition: all .3s;
+      border: 1px solid rgba(0,0,0,.06);
+      min-height: 230px;
+    }
+    .category-card:hover{
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .category-image{
+      background: var(--medium-gray);
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .category-image::before{
+      content:'';
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: linear-gradient(135deg, rgba(52, 37, 107, 0.1) 0%, rgba(245, 206, 0, 0.1) 100%);
+      z-index:1;
+    }
+    .category-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      position:relative;
+      z-index:2;
+      display:block;
+    }
+    .category-content{
+      padding: 2rem;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .category-content h3{
+      font-size:1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-purple);
+    }
+    .category-content p{
+      color:#666;
+      margin-bottom: 1.5rem;
+      line-height:1.6;
+    }
+    .view-role-btn{
+      background: var(--accent-pink);
+      color: var(--white);
+      padding: .75rem 1.5rem;
+      border-radius: 50px;
+      text-decoration:none;
+      font-weight:700;
+      display:inline-block;
+      width: fit-content;
+      transition: all .3s;
+    }
+    .view-role-btn:hover{
+      background: var(--primary-purple);
+      transform: translateX(5px);
+    }
+    .category-card.customer-service{
+      grid-column: 1 / -1;
+      justify-self: center;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    /* ===== Added: “Focus on Growth. Leave the Details to Us.” (final-cta) ===== */
+    .final-cta {
+      padding: 6rem 2rem;
+      background: linear-gradient(135deg, var(--primary-purple) 0%, #4a3785 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/Home%20Page/Hero%20Section%20(try)/Closing%20Section.png') center/cover no-repeat;
+      opacity: 1;
+      z-index: 0;
+    }
+    .final-cta::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: linear-gradient(
+        90deg,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.40) 45%,
+        rgba(0,0,0,0.30) 70%,
+        rgba(0,0,0,0.55) 100%
+      );
+      z-index: 0;
+    }
+    .final-cta-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      padding: 0 2rem;
+    }
+    .final-cta-grid{
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+      text-align: left;
+    }
+    .final-cta h2 { font-size: 3rem; margin-bottom: 1rem; }
+    .final-cta p {
+      font-size: 1.3rem;
+      margin-bottom: 1.25rem;
+      font-weight: 300;
+      max-width: 700px;
+    }
+    .talk-form{
+      background: #34256b;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 20px;
+      padding: 2rem;
+    }
+    .talk-form h3{
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+      color: var(--white);
+    }
+    .talk-form .form-group{ margin-bottom: 1rem; }
+    .talk-form label{
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: rgba(255,255,255,0.9);
+    }
+    .talk-form input{
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.10);
+      color: var(--white);
+      outline: none;
+      font-family: 'Gotham Book', sans-serif;
+    }
+    .talk-form input::placeholder{ color: rgba(255,255,255,0.7); }
+    .talk-form input:focus{
+      border-color: rgba(245, 206, 0, 0.85);
+      box-shadow: 0 0 0 4px rgba(245, 206, 0, 0.15);
+    }
+    .talk-form .form-cta{
+      margin-top: 1.25rem;
+      width: 100%;
+      font-size: 1.1rem;
+      padding: 1rem 1.25rem;
+    }
+    @media (max-width: 768px){
+      .final-cta::after{
+        background: linear-gradient(
+          180deg,
+          rgba(0,0,0,0.60) 0%,
+          rgba(0,0,0,0.45) 50%,
+          rgba(0,0,0,0.65) 100%
+        );
+      }
+    }
+
+    /* FOOTER */
+    footer{
+      background: var(--white);
+      color: var(--black);
+      padding: 4rem 2rem 2rem;
+      border-top: 1px solid var(--medium-gray);
+    }
+    .footer-content{
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-section h4{
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-purple);
+    }
+    .footer-section ul{list-style:none;}
+    .footer-section ul li{margin-bottom:.75rem;}
+    .footer-section a{
+      color: var(--black);
+      text-decoration:none;
+      opacity:.7;
+      transition: all .3s;
+    }
+    .footer-section a:hover{
+      opacity:1;
+      color: var(--primary-purple);
+      padding-left:5px;
+    }
+    .social-icons{
+      display:flex;
+      gap:1rem;
+      margin-top:1rem;
+    }
+    .social-icons a{
+      width:40px;height:40px;
+      background: var(--primary-purple);
+      border-radius: 50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: all .3s;
+      color: var(--white);
+      opacity:1;
+      text-decoration:none;
+    }
+    .social-icons a:hover{
+      background: var(--accent-yellow);
+      color: var(--black);
+      transform: translateY(-5px);
+      padding-left:0;
+    }
+    .footer-bottom{
+      border-top: 1px solid var(--medium-gray);
+      padding-top:2rem;
+      text-align:center;
+      color:#666;
+    }
+    .footer-bottom-links{
+      display:flex;
+      justify-content:center;
+      gap:2rem;
+      margin-top:1rem;
+      flex-wrap:wrap;
+    }
+    .footer-bottom-links a{color:#666;}
+
+    /* Responsive */
+    @media (max-width: 1100px){
+      .hero-grid, .detail-grid, .roles-grid, .tools-grid, .built-grid{grid-template-columns:1fr;}
+      .hero-media{height: 360px;}
+      .detail-media{height: 360px;}
+      .slider-stack{position: static;}
+      .logo-tile{ width: 160px; }
+    }
+    @media (max-width: 1024px){
+      .hero h1{font-size:3rem;}
+      .bullets{grid-template-columns:1fr;}
+      .big-heading{font-size:2.4rem;}
+
+      .final-cta-grid{ grid-template-columns: 1fr; text-align:center; }
+      .final-cta-content{ text-align:center; }
+      .final-cta p{ margin-left:auto; margin-right:auto; }
+      .talk-form{ text-align:left; }
+    }
+    @media (max-width: 768px){
+      .nav-menu{display:none;}
+      .hero{padding:4.7rem 0 3.8rem;}
+      .hero h1{font-size:2.4rem;}
+      .hero p{font-size:1.15rem;}
+      .team-categories .section-title{font-size:2.2rem;}
+      .team-categories .categories-grid{grid-template-columns:1fr;}
+      .category-card{grid-template-columns:1fr;}
+      .category-image{height:200px;}
+      .quote-card{padding:2.4rem 1.5rem;}
+
+      .logo-tile{ width: 150px; height: 86px; }
+      .logo-tile img{ max-height: 48px; }
+
+      .category-card.customer-service{ max-width: none; width: auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/Signature/The-Back-Room-Logo-1.gif" alt="The Back Room">
+      </div>
+
+     <ul class="nav-menu">
+  <li><a href="index.html">Home</a></li>
+
+  <li class="dropdown">
+    <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
+    <div class="dropdown-content">
+      <a href="services-accounting.html">Accounting &amp; Bookkeeping</a>
+      <a href="services-it.html">IT</a>
+
+      <!-- Keep these as anchors to sections that live on services.html -->
+      <a href="services.html#admin">Administration</a>
+      <a href="services.html#architecture">Architecture &amp; Engineering</a>
+      <a href="services.html#customer">Customer Support</a>
+      <a href="services.html#legal">Legal</a>
+      <a href="services.html#marketing">Marketing</a>
+    </div>
+  </li>
+
+  <li><a href="index.html#how-it-works">How It Works</a></li>
+
+  <li class="dropdown">
+    <a href="#">About Us <i class="fas fa-chevron-down"></i></a>
+    <div class="dropdown-content">
+      <a href="#">Why Choose Us</a>
+      <a href="#">Our Journey</a>
+      <a href="#">Our Leaders</a>
+    </div>
+  </li>
+
+  <li class="dropdown">
+    <a href="#">Resources <i class="fas fa-chevron-down"></i></a>
+    <div class="dropdown-content">
+      <a href="#">The Growth Calculator</a>
+      <a href="#">Insights</a>
+      <a href="#">Events</a>
+      <a href="#">Guides</a>
+    </div>
+  </li>
+
+  <li><a href="#">Careers</a></li>
+  <li><a href="#" class="cta-button">Book a Call</a></li>
+</ul>
+
+    </div>
+  </nav>
+
+  <main class="page-wrap">
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="section-container">
+        <div class="hero-grid">
+          <div>
+            <!-- Removed: hero eyebrow -->
+            <h1>IT, Web &amp; Software Development Support</h1>
+            <p>Keep your systems running.<br>Keep your team focused.</p>
+
+            <div class="hero-actions">
+              <a href="#" class="cta-button">Let’s talk</a>
+              <a href="index.html#how-it-works" class="cta-button cta-button-secondary">See how it works</a>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/Services/IT/IT_1.png" alt="IT team working">
+            <div class="hero-badge"><i class="fas fa-shield-halved"></i> Reliable support</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="intro">
+      <div class="section-container">
+        <div class="intro-inner">
+          <h2>Add reliable offshore IT, web, and software development support directly into your team.</h2>
+          <p>
+            From day-to-day IT support and website management to full software development roles, we help businesses add skilled offshore professionals who integrate seamlessly into existing systems and workflows.
+            You stay in control of architecture, priorities, and direction, while we support the technical execution that keeps things running and moving forward.
+          </p>
+          <div class="emphasis">Reliable support.<br>Clean execution.<br>Technology that works the way it should.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTE -->
+    <section class="quote-section">
+      <div class="section-container">
+        <div class="quote-card">
+          <p class="quote-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <div class="quote-meta">
+            <div class="name">Sarah Scott</div>
+            <div class="org">Operations Coordinator, HUSK</div>
+          </div>
+          <div class="quote-actions">
+            <a href="#" class="cta-button">Read customer stories</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IT & SYSTEMS SUPPORT -->
+    <section class="detail" id="it-support">
+      <div class="section-container">
+        <div class="detail-grid">
+          <div>
+            <h2 class="big-heading">IT &amp; Systems Support</h2>
+            <p class="big-sub">Strong IT support keeps teams productive and systems reliable.</p>
+
+            <p>
+              Our offshore IT professionals handle day-to-day support and system maintenance, allowing your internal team to stay focused on delivery, growth, and strategy.
+            </p>
+
+            <p>IT and systems support can include:</p>
+            <ul class="bullets">
+              <li>Helpdesk and user support</li>
+              <li>System monitoring and maintenance</li>
+              <li>Hardware and software support</li>
+              <li>Access and permission management</li>
+              <li>Documentation and system updates</li>
+              <li>General IT administration</li>
+            </ul>
+
+            <div class="detail-actions">
+              <a href="#" class="pink-btn">Book a chat</a>
+            </div>
+          </div>
+
+          <div class="detail-media">
+            <img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/Services/IT/IT_2.svg" alt="IT systems support">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEB & SOFTWARE DEVELOPMENT SUPPORT -->
+    <section class="detail alt" id="dev-support">
+      <div class="section-container">
+        <div class="detail-grid">
+          <div>
+            <h2 class="big-heading">Web &amp; Software Development Support</h2>
+            <p class="big-sub">As products and platforms evolve, development workloads grow quickly.</p>
+
+            <p>
+              Our offshore developers support build, maintenance, and enhancement work across web and software projects, helping teams deliver faster without compromising quality.
+            </p>
+
+            <p>Web and software development support can include:</p>
+            <ul class="bullets">
+              <li>Front-end and back-end development</li>
+              <li>Website builds and ongoing maintenance</li>
+              <li>Application development and enhancements</li>
+              <li>Bug fixes and technical troubleshooting</li>
+              <li>Testing and QA support</li>
+              <li>Documentation and code maintenance</li>
+            </ul>
+
+            <div class="detail-actions">
+              <a href="#" class="pink-btn">Book a chat</a>
+            </div>
+          </div>
+
+          <div class="detail-media">
+            <img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/Services/IT/IT_3.jpg" alt="Web and software development">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLES -->
+    <section class="roles" id="roles">
+      <div class="section-container">
+        <div class="roles-grid">
+          <div>
+            <h2 class="big-heading">Roles You Can Build Into Your Team</h2>
+            <p class="big-sub">
+              Scale your IT and development capability with qualified offshore professionals who integrate into your workflow.
+            </p>
+
+            <div class="role-groups">
+              <div class="role-item">
+                <div class="title">IT support specialist</div>
+                <div class="desc">Provide day-to-day technical support, system maintenance, and user assistance.</div>
+              </div>
+
+              <div class="role-item">
+                <div class="title">Web developer</div>
+                <div class="desc">Build and maintain websites, landing pages, and web applications.</div>
+              </div>
+
+              <div class="role-item">
+                <div class="title">Software developer / full stack developer</div>
+                <div class="desc">Support application development across front-end and back-end environments.</div>
+              </div>
+
+              <div class="role-item">
+                <div class="title">QA / testing support</div>
+                <div class="desc">Assist with testing, bug tracking, and quality assurance across projects.</div>
+              </div>
+
+              <div class="role-item">
+                <div class="title">Technical support &amp; systems administrator</div>
+                <div class="desc">Support infrastructure, access management, and system reliability.</div>
+              </div>
+            </div>
+
+            <div class="roles-actions">
+              <a href="index.html#how-it-works" class="pink-btn">See how these roles fit your team</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOLS -->
+    <section class="tools" id="tools">
+      <div class="section-container">
+        <div class="tools-grid">
+          <div>
+            <h2>Tools &amp; Expertise Our Teams Work With</h2>
+            <p>
+              Your offshore team works inside your tools and workflows, with clear handovers, documentation, and ongoing support.
+            </p>
+
+            <h2 style="font-size:2.1rem; margin-top:2.2rem;">How Our Teams Work With Your Business</h2>
+            <ul class="tools-bullets">
+              <li>Dedicated, full-time team members</li>
+              <li>Embedded in your systems, tools, and ways of working</li>
+              <li>Planned overlap with your time zone for smooth communication</li>
+              <li>Clear tickets, documentation, and handover habits</li>
+              <li>Ongoing coaching, QA, and delivery support</li>
+            </ul>
+
+            <div class="tools-actions">
+              <a href="index.html#how-it-works" class="pink-btn">See how it works</a>
+            </div>
+          </div>
+
+          <!-- UPDATED: 2-row rolling logos (IT Tools) -->
+          <div class="logo-wall" aria-label="IT tools logos">
+            <div class="logo-rows">
+              <div class="logo-row row-1">
+                <div class="logo-track">
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/HTML%20_%20CSS%20_%20JavaScript.png" alt="HTML / CSS / JavaScript"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/TeamViewer.png" alt="TeamViewer"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/SolarWinds.png" alt="SolarWinds"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/React.png" alt="React"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Windows%20Server.png" alt="Windows Server"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/ServiceNow.png" alt="ServiceNow"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/WordPress.png" alt="WordPress"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Python.png" alt="Python"></div>
+                </div>
+                <!-- duplicate for seamless loop -->
+                <div class="logo-track" aria-hidden="true">
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/HTML%20_%20CSS%20_%20JavaScript.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/TeamViewer.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/SolarWinds.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/React.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Windows%20Server.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/ServiceNow.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/WordPress.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Python.png" alt=""></div>
+                </div>
+              </div>
+
+              <div class="logo-row row-2">
+                <div class="logo-track">
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Node.js.png" alt="Node.js"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Linux.png" alt="Linux"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Jira.png" alt="Jira"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Microsoft%20365.png" alt="Microsoft 365"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/DataDog.png" alt="Datadog"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Docker.png" alt="Docker"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Azure%20_%20AWS.png" alt="Azure / AWS"></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Active%20Directory.png" alt="Active Directory"></div>
+                </div>
+                <!-- duplicate for seamless loop -->
+                <div class="logo-track" aria-hidden="true">
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Node.js.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Linux.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Jira.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Microsoft%20365.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/DataDog.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Docker.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Azure%20_%20AWS.png" alt=""></div>
+                  <div class="logo-tile"><img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/IT%20Tools/Active%20Directory.png" alt=""></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END UPDATED -->
+        </div>
+      </div>
+    </section>
+
+    <!-- BUILT -->
+    <section class="built" id="built">
+      <div class="section-container">
+        <div class="built-grid">
+          <div>
+            <h2>Built For Reliable Tech Support, At Scale</h2>
+            <p>
+              Offshore IT and development support that grows with your business, without compromising quality, security, or control.
+            </p>
+            <div class="detail-actions">
+              <a href="#" class="cta-button">Book a chat</a>
+            </div>
+          </div>
+
+          <div class="built-media">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600&q=80" alt="Reliable tech support">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UPDATED: Build the Team That Frees You Up (REPLACED ENTIRE SECTION) -->
+    <section class="team-categories" id="build-your-team">
+      <div class="section-container">
+        <h2 class="section-title">Build the Team That Frees You Up</h2>
+        <div class="categories-grid">
+          <div class="category-card">
+            <div class="category-image">
+              <img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/Talent%20pics/ACCOUNTANT.png" alt="Accounting & Finance">
+            </div>
+            <div class="category-content">
+              <h3>Accounting &amp; Finance</h3>
+              <p>Bookkeepers, accountants, tax, payroll, and reporting support</p>
+              <a href="#" class="view-role-btn">View roles</a>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div class="category-image">
+              <img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/Talent%20pics/VIRTUAL%20ASSISTANT.png" alt="Administration & Operations">
+            </div>
+            <div class="category-content">
+              <h3>Administration &amp; Operations</h3>
+              <p>Executive assistants, admin, document and back-office support</p>
+              <a href="#" class="view-role-btn">View roles</a>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div class="category-image">
+              <img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/Talent%20pics/MARKETING%20ASSISTANT.png" alt="Marketing, Creative & Digital">
+            </div>
+            <div class="category-content">
+              <h3>Marketing, Creative &amp; Digital</h3>
+              <p>Digital marketers, content support, designers, CRM specialists</p>
+              <a href="#" class="view-role-btn">View roles</a>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div class="category-image">
+              <img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/Talent%20pics/CAD%20DESIGNER.png" alt="Architecture, Engineering & Drafting">
+            </div>
+            <div class="category-content">
+              <h3>Architecture, Engineering &amp; Drafting</h3>
+              <p>Draftsmen, CAD technicians, modelling and documentation support</p>
+              <a href="#" class="view-role-btn">View roles</a>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div class="category-image">
+              <img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/Talent%20pics/IT%20TECHNICIAN.png" alt="IT & Software">
+            </div>
+            <div class="category-content">
+              <h3>IT &amp; Software</h3>
+              <p>IT support, web technicians, full stack developers</p>
+              <a href="#" class="view-role-btn">View roles</a>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div class="category-image">
+              <img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/Talent%20pics/LEGAL%20ASSISTANT.png" alt="Legal">
+            </div>
+            <div class="category-content">
+              <h3>Legal</h3>
+              <p>Legal assistants, paralegals, client support teams</p>
+              <a href="#" class="view-role-btn">View roles</a>
+            </div>
+          </div>
+
+          <div class="category-card customer-service">
+            <div class="category-image">
+              <img src="https://8477168.fs1.hubspotusercontent-na1.net/hubfs/8477168/TBR%20Website%20Revamp/Talent%20pics/CSR.png" alt="Customer Service">
+            </div>
+            <div class="category-content">
+              <h3>Customer Service</h3>
+              <p>Customer support teams, inbox, chat, phone, ticket management</p>
+              <a href="#" class="view-role-btn">View roles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END UPDATED TEAM CATEGORIES -->
+
+    <!-- ADDED: Focus on Growth. Leave the Details to Us. (just before footer) -->
+    <section class="final-cta">
+      <div class="final-cta-content">
+        <div class="final-cta-grid">
+          <div>
+            <h2>Seamless IT and Development Support </h2>
+            <p>From software updates and troubleshooting to web development and system management, our offshore teams keep your operations running smoothly so you can focus on growth.</p>
+            <p style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0;">It’s support you can trust.</p>
+          </div>
+
+          <form class="talk-form" action="#" method="post">
+            <h3>Talk With Us</h3>
+
+            <div class="form-group">
+              <label for="tbr-name">Name</label>
+              <input id="tbr-name" name="name" type="text" placeholder="Your name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="tbr-company">Company</label>
+              <input id="tbr-company" name="company" type="text" placeholder="Company name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="tbr-email">Company email</label>
+              <input id="tbr-email" name="email" type="email" placeholder="name@company.com" required>
+            </div>
+
+            <button type="submit" class="cta-button form-cta">Submit</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- END ADDED -->
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Contact Us</h4>
+          <ul>
+            <li>PH: +63 45 499 8386</li>
+            <li>AU/NZ: +64 272 434 418</li>
+            <li>UK: +44 751 263 4207</li>
+            <li>US: +1 970 812 3461</li>
+            <li>CO: +57 314 656 4587</li>
+            <li><a href="mailto:hello@thebackroomop.com">hello@thebackroomop.com</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Book a Call</a></li>
+            <li><a href="#">Customer Stories</a></li>
+            <li><a href="#">The Growth Calculator</a></li>
+            <li><a href="#">Roles</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Insights</a></li>
+            <li><a href="#">Pricing</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services-accounting.html">Accounting & Bookkeeping</a></li>
+            <li><a href="services-it.html">IT, Web & Software Development</a></li>
+            <li><a href="services.html#admin">Administration</a></li>
+            <li><a href="services.html#architecture">Architecture & Engineering</a></li>
+            <li><a href="services.html#customer">Customer Support</a></li>
+            <li><a href="services.html#legal">Legal</a></li>
+            <li><a href="services.html#marketing">Marketing</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 The Back Room. All Rights Reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Accessibility</a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+  </script>
+</body>
+</html>
